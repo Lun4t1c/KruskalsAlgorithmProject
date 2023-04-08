@@ -1,6 +1,7 @@
 ﻿using GraphLib;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace GraphGUI
     {
         #region Properties
         public Graph CurrentGraph { get; set; } = null;
+        public List<UIElement> shapes = new List<UIElement>();
         #endregion
 
 
@@ -38,17 +40,28 @@ namespace GraphGUI
         private void GenerateGraph()
         {
             CurrentGraph = Graph.GenerateSampleGraph();
+            GenerateShapes();
             PaintCanvas();
         }
 
-        private void PaintCanvas()
+        private void GenerateShapes()
         {
             int offset = 0;
 
             foreach (Vertex vertex in CurrentGraph.Vertices)
             {
                 Ellipse ellipse = CreateVertexEllipse(vertex, offset, 0);
+                shapes.Add(ellipse);
                 offset += 100;
+            }
+        }
+
+        private void PaintCanvas()
+        {
+            GraphCanvas.Children.Clear();
+            foreach (UIElement shape in shapes)
+            {
+                GraphCanvas.Children.Add(shape);
             }
         }
 
@@ -66,7 +79,27 @@ namespace GraphGUI
 
             AddTextBlockToEllipse(ellipse, vertex.Label);
 
-            GraphCanvas.Children.Add(ellipse);            
+            GraphCanvas.Children.Add(ellipse);
+
+            ellipse.MouseLeftButtonDown += (sender, e) =>
+            {
+                ellipse.CaptureMouse();
+            };
+            ellipse.MouseMove += (sender, e) =>
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    Point position = e.GetPosition(GraphCanvas);
+
+                    Canvas.SetTop(ellipse, position.Y - (ellipse.Height / 2));
+                    Canvas.SetLeft(ellipse, position.X - (ellipse.Width / 2));
+                }
+            };
+            ellipse.MouseLeftButtonUp += (sender, e) =>
+            {
+                ellipse.ReleaseMouseCapture();
+            };
+
             return ellipse;
         }
 
@@ -88,6 +121,7 @@ namespace GraphGUI
                 Canvas.SetTop(textBlock, Canvas.GetTop(ellipse) + ellipse.Height / 2 - textBlock.ActualHeight / 2);
                 Canvas.SetZIndex(textBlock, 1);
             };
+            shapes.Add(textBlock);
         }
         #endregion
 
