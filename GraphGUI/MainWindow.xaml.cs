@@ -1,4 +1,5 @@
-﻿using GraphLib;
+﻿using GraphGUI.UserControls;
+using GraphLib;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,7 +25,6 @@ namespace GraphGUI
     {
         #region Properties
         public Graph CurrentGraph { get; set; } = null;
-        public List<UIElement> shapes = new List<UIElement>();
         #endregion
 
 
@@ -41,7 +41,6 @@ namespace GraphGUI
         {
             CurrentGraph = Graph.GenerateSampleGraph();
             GenerateShapes();
-            PaintCanvas();
         }
 
         private void GenerateShapes()
@@ -50,78 +49,21 @@ namespace GraphGUI
 
             foreach (Vertex vertex in CurrentGraph.Vertices)
             {
-                Ellipse ellipse = CreateVertexEllipse(vertex, offset, 0);
-                shapes.Add(ellipse);
+                CreateVertexUserControl(vertex, offset, 0);
                 offset += 100;
             }
         }
 
-        private void PaintCanvas()
+        private VertexUserControl CreateVertexUserControl(Vertex vertex, int xOffset, int yOffset)
         {
-            GraphCanvas.Children.Clear();
-            foreach (UIElement shape in shapes)
-            {
-                GraphCanvas.Children.Add(shape);
-            }
-        }
+            VertexUserControl vertexUserControl = new VertexUserControl(vertex, GraphCanvas);
 
-        private Ellipse CreateVertexEllipse(Vertex vertex, int xOffset, int yOffset)
-        {
-            Ellipse ellipse = new Ellipse();
-            ellipse.Width = 50;
-            ellipse.Height = 50;
-            ellipse.Fill = Brushes.Red;
-            ellipse.Stroke = Brushes.Yellow;
-            ellipse.StrokeThickness = 2;
+            Canvas.SetLeft(vertexUserControl, xOffset);
+            Canvas.SetTop(vertexUserControl, yOffset);
 
-            Canvas.SetLeft(ellipse, xOffset);
-            Canvas.SetTop(ellipse, yOffset);
+            GraphCanvas.Children.Add(vertexUserControl);
 
-            AddTextBlockToEllipse(ellipse, vertex.Label);
-
-            GraphCanvas.Children.Add(ellipse);
-
-            ellipse.MouseLeftButtonDown += (sender, e) =>
-            {
-                ellipse.CaptureMouse();
-            };
-            ellipse.MouseMove += (sender, e) =>
-            {
-                if (e.LeftButton == MouseButtonState.Pressed)
-                {
-                    Point position = e.GetPosition(GraphCanvas);
-
-                    Canvas.SetTop(ellipse, position.Y - (ellipse.Height / 2));
-                    Canvas.SetLeft(ellipse, position.X - (ellipse.Width / 2));
-                }
-            };
-            ellipse.MouseLeftButtonUp += (sender, e) =>
-            {
-                ellipse.ReleaseMouseCapture();
-            };
-
-            return ellipse;
-        }
-
-        private void AddTextBlockToEllipse(Ellipse ellipse, string text)
-        {
-            TextBlock textBlock = new TextBlock()
-            {
-                Text = text,
-                TextAlignment = TextAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                FontSize = 14,
-                FontWeight = FontWeights.Bold
-            };
-
-            GraphCanvas.Children.Add(textBlock);
-            textBlock.Loaded += (sender, e) =>
-            {
-                Canvas.SetLeft(textBlock, Canvas.GetLeft(ellipse) + ellipse.Width / 2 - textBlock.ActualWidth / 2);
-                Canvas.SetTop(textBlock, Canvas.GetTop(ellipse) + ellipse.Height / 2 - textBlock.ActualHeight / 2);
-                Canvas.SetZIndex(textBlock, 1);
-            };
-            shapes.Add(textBlock);
+            return vertexUserControl;
         }
         #endregion
 
