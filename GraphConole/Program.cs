@@ -18,7 +18,7 @@ namespace GraphConsole
         {
             foreach (Edge edge in graph.Edges)
             {
-                Console.WriteLine($"{edge.From.Label}--{edge.To.Label} ({edge.Weight})");
+                Console.WriteLine($"{edge.FromVertex.Label}--{edge.ToVertex.Label} ({edge.Weight})");
             }
         }
     }

@@ -26,6 +26,16 @@
 
 
         #region Methods
+        public int GetWeight()
+        {
+            int result = 0;
+
+            foreach (Edge edge in Edges)
+                result += edge.Weight;
+
+            return result;
+        }
+
         public void AddEdge(string label, int weight, string fromLabel, string toLabel)
         {
             Vertex fromVertex = _findOrCreateVertex(fromLabel);
@@ -43,6 +53,8 @@
         {
             List<Graph> steps = new List<Graph>();
 
+
+
             return steps;
         }
 
@@ -51,6 +63,11 @@
             Vertex vertex = new Vertex(++_numberOfVertices, label);
             Vertices.Add(vertex);
             return vertex;
+        }
+
+        private void _containsCycle()
+        {
+            throw new NotImplementedException();
         }
 
         private Vertex _findOrCreateVertex(string label)

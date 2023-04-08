@@ -11,8 +11,8 @@ namespace GraphLib
         #region Properties
         public string Label { get; }
         public int Weight { get; }
-        public Vertex From { get; }
-        public Vertex To { get; }
+        public Vertex FromVertex { get; }
+        public Vertex ToVertex { get; }
         #endregion
 
 
@@ -21,8 +21,8 @@ namespace GraphLib
         {
             Label = label;
             Weight = weight;
-            From = from;
-            To = to;
+            FromVertex = from;
+            ToVertex = to;
         }
         #endregion
 
