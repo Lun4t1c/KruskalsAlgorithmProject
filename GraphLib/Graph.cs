@@ -73,12 +73,17 @@
         {
             Graph graph = new Graph();
 
-            graph.AddEdge("a", 2, "0", "1");
-            graph.AddEdge("b", 1, "0", "2");
-            graph.AddEdge("c", 7, "1", "2");
-            graph.AddEdge("d", 5, "2", "3");
-            graph.AddEdge("e", 1, "3", "1");
-            graph.AddEdge("f", 5, "3", "4");
+            graph.AddEdge("a", 2, "a", "b");
+            graph.AddEdge("b", 4, "a", "d");
+            graph.AddEdge("c", 5, "a", "f");
+            graph.AddEdge("d", 1, "b", "d");
+            graph.AddEdge("e", 3, "b", "e");
+            graph.AddEdge("f", 7, "b", "c");
+            graph.AddEdge("f", 4, "b", "g");
+            graph.AddEdge("f", 8, "b", "f");
+            graph.AddEdge("f", 10, "c", "e");
+            graph.AddEdge("f", 2, "d", "e");
+            graph.AddEdge("f", 1, "f", "g");
 
             return graph;
         }
