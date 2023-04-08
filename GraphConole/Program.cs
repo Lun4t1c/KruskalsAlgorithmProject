@@ -9,7 +9,7 @@ namespace GraphConsole
     {
         public static void Main(string[] args)
         {
-            Graph graph = new Graph();
+            Graph graph = Graph.GenerateSampleGraph();
             Console.WriteLine("Hello graph");            
         }
     }

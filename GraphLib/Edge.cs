@@ -11,13 +11,13 @@ namespace GraphLib
         #region Properties
         public string Label { get; }
         public int Weight { get; }
-        public Edge From { get; }
-        public Edge To { get; }
+        public Vertex From { get; }
+        public Vertex To { get; }
         #endregion
 
 
         #region Constructor
-        public Edge(string label, int weight, Edge from, Edge to)
+        public Edge(string label, int weight, Vertex from, Vertex to)
         {
             Label = label;
             Weight = weight;
