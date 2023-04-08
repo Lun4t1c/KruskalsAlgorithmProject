@@ -3,7 +3,7 @@
     public class Graph
     {
         #region Properties
-        private static int _numberOfEdges = 0;
+        public int _numberOfVertices { get; set; }
 
         public List<Edge> Edges { get; set; } = new List<Edge>();
         public List<Vertex> Vertices { get; set; } = new List<Vertex>();
@@ -13,7 +13,14 @@
         #region Constructor
         public Graph()
         {
+            _numberOfVertices = 0;
+        }
 
+        public Graph(Graph graph)
+        {
+            _numberOfVertices = graph._numberOfVertices;
+            Edges = new List<Edge>(graph.Edges);
+            Vertices = new List<Vertex>(graph.Vertices);
         }
         #endregion
 
@@ -32,9 +39,16 @@
             ));
         }
 
+        public List<Graph> performKruskalAlgorithm()
+        {
+            List<Graph> steps = new List<Graph>();
+
+            return steps;
+        }
+
         private Vertex _addVertex(string label)
         {
-            Vertex vertex = new Vertex(++_numberOfEdges, label);
+            Vertex vertex = new Vertex(++_numberOfVertices, label);
             Vertices.Add(vertex);
             return vertex;
         }
