@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphLib", "GraphLib\GraphLib.csproj", "{B3262E2D-901B-4EAB-BCEC-6F817D3EF426}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphConole", "GraphConole\GraphConole.csproj", "{EAD0BAE0-08E2-4BB4-95D6-716ABF0E62DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphConole", "GraphConole\GraphConole.csproj", "{EAD0BAE0-08E2-4BB4-95D6-716ABF0E62DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphGUI", "GraphGUI\GraphGUI.csproj", "{7B3D45D9-9D6D-4FAA-BAE9-35030494B6EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EAD0BAE0-08E2-4BB4-95D6-716ABF0E62DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAD0BAE0-08E2-4BB4-95D6-716ABF0E62DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAD0BAE0-08E2-4BB4-95D6-716ABF0E62DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B3D45D9-9D6D-4FAA-BAE9-35030494B6EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B3D45D9-9D6D-4FAA-BAE9-35030494B6EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B3D45D9-9D6D-4FAA-BAE9-35030494B6EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B3D45D9-9D6D-4FAA-BAE9-35030494B6EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
