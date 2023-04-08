@@ -10,7 +10,16 @@ namespace GraphConsole
         public static void Main(string[] args)
         {
             Graph graph = Graph.GenerateSampleGraph();
-            Console.WriteLine("Hello graph");            
+            Graph graph2 = Graph.GenerateSampleGraph();
+            PrintGraph(graph2);
+        }
+
+        public static void PrintGraph(Graph graph)
+        {
+            foreach (Edge edge in graph.Edges)
+            {
+                Console.WriteLine($"{edge.From.Label}--{edge.To.Label} ({edge.Weight})");
+            }
         }
     }
 }

@@ -73,6 +73,13 @@
         {
             Graph graph = new Graph();
 
+            graph.AddEdge("a", 2, "0", "1");
+            graph.AddEdge("b", 1, "0", "2");
+            graph.AddEdge("c", 7, "1", "2");
+            graph.AddEdge("d", 5, "2", "3");
+            graph.AddEdge("e", 1, "3", "1");
+            graph.AddEdge("f", 5, "3", "4");
+
             return graph;
         }
         #endregion
