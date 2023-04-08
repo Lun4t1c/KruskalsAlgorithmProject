@@ -10,7 +10,10 @@ namespace GraphConsole
         public static void Main(string[] args)
         {
             Graph graph = Graph.GenerateSampleGraph();
-            Graph graph2 = Graph.GenerateSampleGraph();
+            Graph graph2 = new Graph(graph);
+
+            PrintGraph(graph);
+            Console.WriteLine();
             PrintGraph(graph2);
         }
 

@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:GraphGUI"
         mc:Ignorable="d"
         Title="Kruskal" Height="450" Width="800"
-        Background="#0a0229">
+        Background="#0a0229"
+        WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
