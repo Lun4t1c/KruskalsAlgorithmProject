@@ -96,11 +96,12 @@
             graph.AddEdge("d", 1, "b", "d");
             graph.AddEdge("e", 3, "b", "e");
             graph.AddEdge("f", 7, "b", "c");
-            graph.AddEdge("f", 4, "b", "g");
-            graph.AddEdge("f", 8, "b", "f");
-            graph.AddEdge("f", 10, "c", "e");
-            graph.AddEdge("f", 2, "d", "e");
-            graph.AddEdge("f", 1, "f", "g");
+            graph.AddEdge("g", 4, "b", "g");
+            graph.AddEdge("h", 8, "b", "f");
+            graph.AddEdge("i", 10, "c", "e");
+            graph.AddEdge("j", 2, "d", "e");
+            graph.AddEdge("k", 1, "f", "g");
+            graph.AddEdge("l", 6, "g", "c");
 
             return graph;
         }

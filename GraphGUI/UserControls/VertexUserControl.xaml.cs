@@ -21,12 +21,14 @@ namespace GraphGUI.UserControls
     /// </summary>
     public partial class VertexUserControl : UserControl
     {
-        public Canvas CanvasHandle { get; set; }
+        public MainWindow MainWindowHandle { get; set; }
+        public Vertex Vertex { get; set; }
 
-        public VertexUserControl(Vertex vertex, Canvas canvasHandle)
+        public VertexUserControl(Vertex vertex, MainWindow mainWindowHandle)
         {
             InitializeComponent();
-            CanvasHandle = canvasHandle;
+            Vertex = vertex;
+            MainWindowHandle = mainWindowHandle;
 
             ellipse.Width = 50;
             ellipse.Height = 50;
@@ -47,9 +49,10 @@ namespace GraphGUI.UserControls
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
-                    Point p = e.GetPosition(CanvasHandle);
+                    Point p = e.GetPosition(MainWindowHandle.GraphCanvas);
                     Canvas.SetLeft(shape, p.X - shape.ActualWidth / 2);
                     Canvas.SetTop(shape, p.Y - shape.ActualHeight / 2);
+                    MainWindowHandle.GenerateLines();
                     shape.CaptureMouse();
                 }
                 else

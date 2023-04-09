@@ -28,7 +28,8 @@
         </StackPanel>
 
         <Canvas Grid.Column="1" Grid.Row="0"
-                x:Name="GraphCanvas"/>
+                x:Name="GraphCanvas"
+                x:FieldModifier="public"/>
         
     </Grid>
 </Window>
