@@ -39,7 +39,7 @@ namespace GraphGUI.UserControls
             textBlock.Text = vertex.Label;
             textBlock.TextAlignment = TextAlignment.Center;
             textBlock.VerticalAlignment = VerticalAlignment.Center;
-            textBlock.FontSize = 14;
+            textBlock.FontSize = 20;
             textBlock.FontWeight = FontWeights.Bold;            
         }
 

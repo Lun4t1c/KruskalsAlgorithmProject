@@ -134,8 +134,8 @@ namespace GraphGUI
             textBlock.Text = weight.ToString();
             textBlock.TextAlignment = TextAlignment.Center;
             textBlock.VerticalAlignment = VerticalAlignment.Center;
-            textBlock.FontSize = 14;
-            textBlock.FontWeight = FontWeights.Bold;
+            textBlock.FontSize = 22;
+            textBlock.FontWeight = FontWeights.Normal;
             textBlock.Foreground = Brushes.Yellow;
 
             textBlock.Loaded += (sender, e) =>
