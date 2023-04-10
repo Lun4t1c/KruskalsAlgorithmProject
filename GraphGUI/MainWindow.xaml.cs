@@ -177,6 +177,11 @@ namespace GraphGUI
 
         private void ClearCanvas()
         {
+            ClearLines();
+        }
+
+        private void ClearLines()
+        {
             foreach (Line line in EdgesLines)
                 GraphCanvas.Children.Remove(line);
             EdgesLines.Clear();
@@ -198,8 +203,8 @@ namespace GraphGUI
         {
             if (CurrentGraph != null)
             {
-                CurrentGraph = CurrentGraph.PerformKruskalAlgorithm();
-                GenerateGraph();
+                CurrentGraph.TransformIntoMSTKruskal();
+                GenerateLines();
             }
         }
         #endregion

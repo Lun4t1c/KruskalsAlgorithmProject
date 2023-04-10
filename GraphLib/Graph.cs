@@ -59,7 +59,7 @@
             ));
         }
 
-        public Graph PerformKruskalAlgorithm()
+        public Graph GetMSTKruskal()
         {
             List<Edge> edges = new List<Edge>(this.Edges);
             edges.Sort((e1, e2) => e1.Weight.CompareTo(e2.Weight));
@@ -99,6 +99,12 @@
                 vertex = parent[vertex];
             }
             return vertex;
+        }
+
+        public void TransformIntoMSTKruskal()
+        {
+            Graph mst = this.GetMSTKruskal();
+            this.Edges = mst.Edges;
         }
 
         public List<Graph> PerformKruskalAlgorithmGetStepByStep()
