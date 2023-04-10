@@ -17,7 +17,7 @@
         <StackPanel Grid.Column="0" Grid.Row="0"
                     Background="#06021a">
             
-            <Button Click="GenerateGraphButton_Click"
+            <Button Click="GenerateDefaultGraphButton_Click"
                     Content="Generate graph"
                     Margin="5"/>
 

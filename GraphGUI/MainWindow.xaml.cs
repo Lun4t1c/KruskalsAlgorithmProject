@@ -53,12 +53,29 @@ namespace GraphGUI
         #region Methods
         private void GenerateGraph()
         {
-            CurrentGraph = Graph.GenerateSampleGraph();
-            GenerateShapes();
+            foreach (VertexUserControl vertexUserControl in VertexUserControls)
+                GraphCanvas.Children.Remove(vertexUserControl);
+            VertexUserControls.Clear();
+
+            foreach (Line line in EdgesLines)
+                GraphCanvas.Children.Remove(line);
+            EdgesLines.Clear();
+
+            foreach (TextBlock textBlock in WeightsTextBlocks)
+                GraphCanvas.Children.Remove(textBlock);
+            WeightsTextBlocks.Clear();
+
+            GenerateVertices();
             GenerateLines();
         }
 
-        private void GenerateShapes()
+        private void GenerateDefaultGraph()
+        {
+            CurrentGraph = Graph.GenerateSampleGraph();
+            GenerateGraph();
+        }
+
+        private void GenerateVertices()
         {
             int xOffset = 5;
             int yOffset = 5;
@@ -77,14 +94,7 @@ namespace GraphGUI
 
         public void GenerateLines()
         {
-            foreach (Line line in EdgesLines)
-                GraphCanvas.Children.Remove(line);
-            EdgesLines.Clear();
-
-            foreach (TextBlock textBlock in WeightsTextBlocks)
-                GraphCanvas.Children.Remove(textBlock);
-            WeightsTextBlocks.Clear();
-
+            ClearCanvas();
             foreach (Edge edge in CurrentGraph.Edges)
                 DrawLineBetweenVertexUserControls(edge);
         }
@@ -162,18 +172,33 @@ namespace GraphGUI
             GraphCanvas.Children.Add(textBlock);
             WeightsTextBlocks.Add(textBlock);
         }
+
+        private void ClearCanvas()
+        {
+            foreach (Line line in EdgesLines)
+                GraphCanvas.Children.Remove(line);
+            EdgesLines.Clear();
+
+            foreach (TextBlock textBlock in WeightsTextBlocks)
+                GraphCanvas.Children.Remove(textBlock);
+            WeightsTextBlocks.Clear();
+        }
         #endregion
 
 
         #region Button clicks
-        private void GenerateGraphButton_Click(object sender, RoutedEventArgs e)
+        private void GenerateDefaultGraphButton_Click(object sender, RoutedEventArgs e)
         {
-            GenerateGraph();
+            GenerateDefaultGraph();
         }
 
         private void PerformKruskalButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (CurrentGraph != null)
+            {
+                CurrentGraph = CurrentGraph.PerformKruskalAlgorithm();
+                GenerateGraph();
+            }
         }
         #endregion
     }
