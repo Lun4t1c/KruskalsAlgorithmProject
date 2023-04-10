@@ -53,17 +53,7 @@ namespace GraphGUI
         #region Methods
         private void GenerateGraph()
         {
-            foreach (VertexUserControl vertexUserControl in VertexUserControls)
-                GraphCanvas.Children.Remove(vertexUserControl);
-            VertexUserControls.Clear();
-
-            foreach (Line line in EdgesLines)
-                GraphCanvas.Children.Remove(line);
-            EdgesLines.Clear();
-
-            foreach (TextBlock textBlock in WeightsTextBlocks)
-                GraphCanvas.Children.Remove(textBlock);
-            WeightsTextBlocks.Clear();
+            ClearCanvas();
 
             GenerateVertices();
             GenerateLines();
@@ -77,6 +67,8 @@ namespace GraphGUI
 
         private void GenerateVertices()
         {
+            ClearCanvas();
+
             int xOffset = 5;
             int yOffset = 5;
 
@@ -94,7 +86,7 @@ namespace GraphGUI
 
         public void GenerateLines()
         {
-            ClearCanvas();
+            ClearLines();
             foreach (Edge edge in CurrentGraph.Edges)
                 DrawLineBetweenVertexUserControls(edge);
         }
@@ -177,6 +169,10 @@ namespace GraphGUI
 
         private void ClearCanvas()
         {
+            foreach (VertexUserControl vertexUserControl in VertexUserControls)
+                GraphCanvas.Children.Remove(vertexUserControl);
+            VertexUserControls.Clear();
+
             ClearLines();
         }
 
