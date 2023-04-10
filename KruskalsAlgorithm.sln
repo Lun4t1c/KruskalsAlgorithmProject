@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphLib", "GraphLib\GraphLib.csproj", "{B3262E2D-901B-4EAB-BCEC-6F817D3EF426}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphConsole", "GraphConsole\GraphConsole.csproj", "{EAD0BAE0-08E2-4BB4-95D6-716ABF0E62DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphConsole", "GraphConole\GraphConsole.csproj", "{EAD0BAE0-08E2-4BB4-95D6-716ABF0E62DA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphGUI", "GraphGUI\GraphGUI.csproj", "{7B3D45D9-9D6D-4FAA-BAE9-35030494B6EB}"
 EndProject

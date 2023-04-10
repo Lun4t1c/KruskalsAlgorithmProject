@@ -23,6 +23,8 @@ namespace GraphGUI.UserControls
     {
         public MainWindow MainWindowHandle { get; set; }
         public Vertex Vertex { get; set; }
+        public double LocationX { get; set; } = 0;
+        public double LocationY { get; set; } = 0;
 
         public VertexUserControl(Vertex vertex, MainWindow mainWindowHandle)
         {
@@ -50,8 +52,12 @@ namespace GraphGUI.UserControls
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
                     Point p = e.GetPosition(MainWindowHandle.GraphCanvas);
-                    Canvas.SetLeft(shape, p.X - shape.ActualWidth / 2);
-                    Canvas.SetTop(shape, p.Y - shape.ActualHeight / 2);
+
+                    LocationX = p.X - shape.ActualWidth / 2;
+                    LocationY = p.Y - shape.ActualHeight / 2;
+
+                    Canvas.SetLeft(shape, LocationX);
+                    Canvas.SetTop(shape, LocationY);
                     MainWindowHandle.GenerateLines();
                     shape.CaptureMouse();
                 }

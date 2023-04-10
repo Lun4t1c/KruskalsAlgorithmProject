@@ -102,9 +102,11 @@ namespace GraphGUI
         private VertexUserControl CreateVertexUserControl(Vertex vertex, int xOffset, int yOffset)
         {
             VertexUserControl vertexUserControl = new VertexUserControl(vertex, this);
+            vertexUserControl.LocationX = xOffset;
+            vertexUserControl.LocationY = yOffset;
 
-            Canvas.SetLeft(vertexUserControl, xOffset);
-            Canvas.SetTop(vertexUserControl, yOffset);
+            Canvas.SetLeft(vertexUserControl, vertexUserControl.LocationX);
+            Canvas.SetTop(vertexUserControl, vertexUserControl.LocationY);
 
             GraphCanvas.Children.Add(vertexUserControl);
 
