@@ -28,6 +28,17 @@ namespace GraphGUI
         public List<VertexUserControl> VertexUserControls { get; set; } = new List<VertexUserControl>();
         public List<Line> EdgesLines { get; set; } = new List<Line>();
         public List<TextBlock> WeightsTextBlocks { get; set; } = new List<TextBlock>();
+
+        public Dictionary<string, Point> CustomVertexPoints { get; set; } = new Dictionary<string, Point>()
+        {
+            { "a", new Point() },
+            { "b", new Point() },
+            { "c", new Point() },
+            { "d", new Point() },
+            { "e", new Point() },
+            { "f", new Point() },
+            { "g", new Point() },
+        };
         #endregion
 
 
