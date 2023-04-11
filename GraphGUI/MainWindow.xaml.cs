@@ -1,4 +1,5 @@
 ﻿using GraphGUI.UserControls;
+using GraphGUI.Utils;
 using GraphLib;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace GraphGUI
         public List<Line> EdgesLines { get; set; } = new List<Line>();
         public List<TextBlock> WeightsTextBlocks { get; set; } = new List<TextBlock>();
         private bool IsOverlayModeEnabled { get; set; } = false;
+        public ToolsEnum SelectedTool { get; set; } = ToolsEnum.None;
 
         public Dictionary<string, Point> CustomVertexPoints { get; set; } = new Dictionary<string, Point>()
         {
@@ -285,6 +287,14 @@ namespace GraphGUI
             IsOverlayModeEnabled = false;
             if (CurrentGraph != null && CurrentGraph.Edges != null) 
                 RedrawLines();
+        }
+
+        private void GraphCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectedTool == ToolsEnum.AddVertex || Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                CreateVertexUserControl(new Vertex(69, "benc"), (int)e.GetPosition(GraphCanvas).X, (int)e.GetPosition(GraphCanvas).Y);
+            }
         }
         #endregion
     }
