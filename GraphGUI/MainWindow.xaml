@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="Kruskal" Height="450" Width="800"
         Background="#0a0229"
+        FontFamily="Segoe UI"
+        FontSize="20"
         WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -33,6 +35,12 @@
                     Content="Step by step"
                     Margin="5"/>
 
+            <CheckBox Content="Overlay mode"
+                      Checked="CheckBox_Checked"
+                      Unchecked="CheckBox_Unchecked"
+                      Foreground="Wheat"
+                      Margin="5"/>
+
         </StackPanel>
 
         <Border Grid.Column="1" Grid.Row="0"
@@ -53,7 +61,7 @@
                     Click="PreviousStepButton_Click"
                     Content="Previous step"
                     Margin="5"/>
-            
+
             <Button Grid.Column="1"
                     Click="NextStepButton_Click"
                     Content="Next step"

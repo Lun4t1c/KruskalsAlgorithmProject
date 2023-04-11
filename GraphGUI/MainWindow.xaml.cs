@@ -25,11 +25,13 @@ namespace GraphGUI
     {
         #region Properties
         public Graph CurrentGraph { get; set; } = null;
+        public Graph OverlayGraph { get; set; } = null;
         public List<Graph> CurrentSteps { get; set; } = new List<Graph>();
         public int CurrentStepsIndex { get; set; } = 0;
         public List<VertexUserControl> VertexUserControls { get; set; } = new List<VertexUserControl>();
         public List<Line> EdgesLines { get; set; } = new List<Line>();
         public List<TextBlock> WeightsTextBlocks { get; set; } = new List<TextBlock>();
+        private bool IsOverlayModeEnabled { get; set; } = false;
 
         public Dictionary<string, Point> CustomVertexPoints { get; set; } = new Dictionary<string, Point>()
         {
@@ -48,6 +50,7 @@ namespace GraphGUI
         public MainWindow()
         {
             InitializeComponent();
+            IsOverlayModeEnabled = true;
         }
         #endregion
 
@@ -89,8 +92,30 @@ namespace GraphGUI
         public void RedrawLines()
         {
             ClearLines();
-            foreach (Edge edge in CurrentGraph.Edges)
-                DrawLineBetweenVertexUserControls(edge);
+            
+            if (IsOverlayModeEnabled)
+            {
+                foreach (Edge edge in CurrentGraph.Edges)
+                    DrawLineBetweenVertexUserControls(edge, Brushes.Gray);
+
+                if (OverlayGraph != null)
+                {
+                    foreach (Edge edge in OverlayGraph.Edges)
+                    {
+                        DrawLineBetweenVertexUserControls(edge, Brushes.Green);
+                    }
+                }
+            }
+            else
+            {
+                if (OverlayGraph != null)
+                {
+                    foreach (Edge edge in OverlayGraph.Edges)
+                    {
+                        DrawLineBetweenVertexUserControls(edge, Brushes.Gray);
+                    }
+                }
+            }
         }
 
         private VertexUserControl CreateVertexUserControl(Vertex vertex, int xOffset, int yOffset)
@@ -117,7 +142,7 @@ namespace GraphGUI
             return VertexUserControls.Find(vuc => vuc.Vertex.Label == label);
         }
 
-        private void DrawLineBetweenVertexUserControls(Edge edge)
+        private void DrawLineBetweenVertexUserControls(Edge edge, Brush brush)
         {
             VertexUserControl vertexControl1 = FindVertexUserControlByLabel(edge.FromVertex.Label);
             VertexUserControl vertexControl2 = FindVertexUserControlByLabel(edge.ToVertex.Label);
@@ -133,8 +158,8 @@ namespace GraphGUI
             line.Y2 = Canvas.GetTop(vertexControl2) + vertexControl2.ActualHeight / 2;
 
             // Set the color and thickness of the line
-            line.Stroke = Brushes.Wheat;
-            line.StrokeThickness = 2;
+            line.Stroke = brush;
+            line.StrokeThickness = 4;
 
             Canvas.SetZIndex(line, -1);
 
@@ -195,7 +220,7 @@ namespace GraphGUI
             else
             {
                 CurrentStepsIndex++;
-                CurrentGraph = CurrentSteps[CurrentStepsIndex];
+                OverlayGraph = CurrentSteps[CurrentStepsIndex];
                 RedrawLines();
             }
         }
@@ -206,7 +231,7 @@ namespace GraphGUI
             else
             {
                 CurrentStepsIndex--;
-                CurrentGraph = CurrentSteps[CurrentStepsIndex];
+                OverlayGraph = CurrentSteps[CurrentStepsIndex];
                 RedrawLines();
             }
         }
@@ -233,7 +258,7 @@ namespace GraphGUI
             if (CurrentGraph != null)
             {
                 CurrentSteps = CurrentGraph.GetMSTKruskalStepByStep();
-                CurrentGraph = CurrentSteps[0];
+                OverlayGraph = CurrentSteps[0];
                 RedrawLines();
             }
         }
@@ -246,6 +271,20 @@ namespace GraphGUI
         private void PreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
             PreviousStep();
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            IsOverlayModeEnabled = true;
+            if (CurrentGraph != null && CurrentGraph.Edges != null) 
+                RedrawLines();
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            IsOverlayModeEnabled = false;
+            if (CurrentGraph != null && CurrentGraph.Edges != null) 
+                RedrawLines();
         }
         #endregion
     }
