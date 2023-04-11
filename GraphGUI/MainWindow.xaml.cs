@@ -24,7 +24,9 @@ namespace GraphGUI
     public partial class MainWindow : Window
     {
         #region Properties
-        public Graph CurrentGraph { get; set; }
+        public Graph CurrentGraph { get; set; } = null;
+        public List<Graph> CurrentSteps { get; set; } = new List<Graph>();
+        public int CurrentStepsIndex { get; set; } = 0;
         public List<VertexUserControl> VertexUserControls { get; set; } = new List<VertexUserControl>();
         public List<Line> EdgesLines { get; set; } = new List<Line>();
         public List<TextBlock> WeightsTextBlocks { get; set; } = new List<TextBlock>();
@@ -56,7 +58,7 @@ namespace GraphGUI
             ClearCanvas();
 
             GenerateVertices();
-            GenerateLines();
+            RedrawLines();
         }
 
         private void GenerateDefaultGraph()
@@ -84,7 +86,7 @@ namespace GraphGUI
             }
         }
 
-        public void GenerateLines()
+        public void RedrawLines()
         {
             ClearLines();
             foreach (Edge edge in CurrentGraph.Edges)
@@ -104,7 +106,7 @@ namespace GraphGUI
 
             vertexUserControl.Loaded += (sender, e) =>
             {
-                GenerateLines();
+                RedrawLines();
             };
 
             return vertexUserControl;
@@ -186,6 +188,28 @@ namespace GraphGUI
                 GraphCanvas.Children.Remove(textBlock);
             WeightsTextBlocks.Clear();
         }
+
+        private void NextStep()
+        {
+            if (CurrentStepsIndex >= CurrentSteps.Count - 1) return;
+            else
+            {
+                CurrentStepsIndex++;
+                CurrentGraph = CurrentSteps[CurrentStepsIndex];
+                RedrawLines();
+            }
+        }
+
+        private void PreviousStep()
+        {
+            if (CurrentStepsIndex <= 0) return;
+            else
+            {
+                CurrentStepsIndex--;
+                CurrentGraph = CurrentSteps[CurrentStepsIndex];
+                RedrawLines();
+            }
+        }
         #endregion
 
 
@@ -200,8 +224,28 @@ namespace GraphGUI
             if (CurrentGraph != null)
             {
                 CurrentGraph.TransformIntoMSTKruskal();
-                GenerateLines();
+                RedrawLines();
             }
+        }
+
+        private void PerformKruskalStepByStepButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentGraph != null)
+            {
+                CurrentSteps = CurrentGraph.GetMSTKruskalStepByStep();
+                CurrentGraph = CurrentSteps[0];
+                RedrawLines();
+            }
+        }
+
+        private void NextStepButton_Click(object sender, RoutedEventArgs e)
+        {
+            NextStep();
+        }
+
+        private void PreviousStepButton_Click(object sender, RoutedEventArgs e)
+        {
+            PreviousStep();
         }
         #endregion
     }

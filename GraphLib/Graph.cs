@@ -107,11 +107,43 @@
             this.Edges = mst.Edges;
         }
 
-        public List<Graph> PerformKruskalAlgorithmGetStepByStep()
+        public List<Graph> GetMSTKruskalStepByStep()
         {
             List<Graph> steps = new List<Graph>();
+            Graph tempGraph = new Graph();
+            tempGraph.Vertices = new List<Vertex>(this.Vertices);
+            steps.Add(new Graph(tempGraph));
 
-            throw new NotImplementedException();
+            List<Edge> edges = new List<Edge>(this.Edges);
+            edges.Sort((e1, e2) => e1.Weight.CompareTo(e2.Weight));
+
+            int[] parent = new int[Vertices.Count];
+            for (int i = 0; i < Vertices.Count; i++)
+            {
+                parent[i] = i;
+            }
+
+            List<Edge> minimumSpanningTreeEdges = new List<Edge>();
+
+            foreach (Edge edge in edges)
+            {
+                int root1 = FindRoot(edge.FromVertex.Id - 1, parent);
+                int root2 = FindRoot(edge.ToVertex.Id - 1, parent);
+
+                if (root1 != root2)
+                {
+                    minimumSpanningTreeEdges.Add(edge);
+                    tempGraph.AddEdge(edge);
+                    steps.Add(new Graph(tempGraph));
+                    parent[root1] = root2;
+                }
+            }
+
+            Graph graph = new Graph();
+            foreach (Edge edge in minimumSpanningTreeEdges)
+            {
+                graph.AddEdge(edge);
+            }
 
             return steps;
         }

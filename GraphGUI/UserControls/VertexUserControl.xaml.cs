@@ -58,7 +58,7 @@ namespace GraphGUI.UserControls
 
                     Canvas.SetLeft(shape, LocationX);
                     Canvas.SetTop(shape, LocationY);
-                    MainWindowHandle.GenerateLines();
+                    MainWindowHandle.RedrawLines();
                     shape.CaptureMouse();
                 }
                 else
