@@ -1,6 +1,7 @@
 ﻿using GraphGUI.UserControls;
 using GraphGUI.Utils;
 using GraphLib;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -81,12 +82,22 @@ namespace GraphGUI
 
             foreach (Vertex vertex in CurrentGraph.Vertices)
             {
-                VertexUserControls.Add(CreateVertexUserControl(vertex, xOffset, yOffset));
-                xOffset += 100;
-                if (xOffset >= 400)
+                Dictionary<string, Point> locationsDictionary = JsonConvert.DeserializeObject<Dictionary<string, Point>>(Properties.Settings.Default.VertexLocations);
+
+                if (locationsDictionary != null && locationsDictionary.ContainsKey(vertex.Label))
                 {
-                    yOffset += 100;
-                    xOffset = 5;
+                    VertexUserControls.Add(CreateVertexUserControl(vertex, (int)locationsDictionary[vertex.Label].X, (int)locationsDictionary[vertex.Label].Y));
+                }
+                else
+                {
+                    VertexUserControls.Add(CreateVertexUserControl(vertex, xOffset, yOffset));
+
+                    xOffset += 100;
+                    if (xOffset >= 400)
+                    {
+                        yOffset += 100;
+                        xOffset = 5;
+                    }
                 }
             }
         }
@@ -184,8 +195,8 @@ namespace GraphGUI
 
             textBlock.Loaded += (sender, e) =>
             {
-                double textBlockLeft = (line.X1 + line.X2 - textBlock.ActualWidth) / 2;
-                double textBlockTop = (line.Y1 + line.Y2 - textBlock.ActualHeight) / 2 - 15;
+                double textBlockLeft = (line.X1 + line.X2 - textBlock.ActualWidth) / 2 + 20;
+                double textBlockTop = (line.Y1 + line.Y2 - textBlock.ActualHeight) / 2 - 20;
 
                 Canvas.SetLeft(textBlock, textBlockLeft);
                 Canvas.SetTop(textBlock, textBlockTop);

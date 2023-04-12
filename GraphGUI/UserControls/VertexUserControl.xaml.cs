@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace GraphGUI.UserControls
 {
@@ -58,7 +59,9 @@ namespace GraphGUI.UserControls
 
                     Canvas.SetLeft(shape, LocationX);
                     Canvas.SetTop(shape, LocationY);
-                    MainWindowHandle.RedrawLines();
+                    SavePositionInSettings();
+
+                    MainWindowHandle.RedrawLines();                    
                     shape.CaptureMouse();
                 }
                 else
@@ -66,6 +69,14 @@ namespace GraphGUI.UserControls
                     shape.ReleaseMouseCapture();
                 }
             }
+        }
+
+        private void SavePositionInSettings()
+        {
+            Dictionary<string, Point> locationsDictionary = JsonConvert.DeserializeObject<Dictionary<string, Point>>(Properties.Settings.Default.VertexLocations);
+            locationsDictionary[this.Vertex.Label] = new Point(this.LocationX, this.LocationY);
+            Properties.Settings.Default.VertexLocations = JsonConvert.SerializeObject(locationsDictionary);
+            Properties.Settings.Default.Save();
         }
     }
 }
