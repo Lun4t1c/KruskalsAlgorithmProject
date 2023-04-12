@@ -195,6 +195,32 @@
 
             return graph;
         }
+
+        public static Graph GenerateSampleGraph2()
+        {
+            Graph graph = new Graph();
+
+            graph.AddEdge("-", 2, "a", "b");
+            graph.AddEdge("-", 3, "a", "m");
+            graph.AddEdge("-", 1, "b", "k");
+            graph.AddEdge("-", 6, "b", "j");
+            graph.AddEdge("-", 3, "b", "c");
+            graph.AddEdge("-", 1, "c", "f");
+            graph.AddEdge("-", 7, "d", "e");
+            graph.AddEdge("-", 3, "e", "f");
+            graph.AddEdge("-", 2, "f", "h");
+            graph.AddEdge("-", 4, "h", "g");
+            graph.AddEdge("-", 5, "h", "i");
+            graph.AddEdge("-", 1, "i", "g");
+            graph.AddEdge("-", 1, "i", "j");
+            graph.AddEdge("-", 2, "i", "k");
+            graph.AddEdge("-", 4, "k", "j");
+            graph.AddEdge("-", 4, "k", "l");
+            graph.AddEdge("-", 3, "l", "m");
+            graph.AddEdge("-", 7, "m", "k");
+
+            return graph;
+        }
         #endregion
     }
 }

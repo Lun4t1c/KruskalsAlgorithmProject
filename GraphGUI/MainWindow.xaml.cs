@@ -68,7 +68,7 @@ namespace GraphGUI
 
         private void GenerateDefaultGraph()
         {
-            CurrentGraph = Graph.GenerateSampleGraph();
+            CurrentGraph = Graph.GenerateSampleGraph2();
             GenerateGraph();
         }
 
