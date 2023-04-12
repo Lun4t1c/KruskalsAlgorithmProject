@@ -119,7 +119,7 @@ namespace GraphGUI
 
                 if (OverlayGraph != null)
                     foreach (Edge edge in OverlayGraph.Edges)
-                        DrawLineBetweenVertexUserControls(edge, Brushes.Green, 4);
+                        DrawLineBetweenVertexUserControls(edge, Brushes.LawnGreen, 6);
             }
             else
             {
@@ -187,7 +187,7 @@ namespace GraphGUI
             textBlock.Text = weight.ToString();
             textBlock.TextAlignment = TextAlignment.Center;
             textBlock.VerticalAlignment = VerticalAlignment.Center;
-            textBlock.FontSize = 22;
+            textBlock.FontSize = 26;
             textBlock.FontWeight = FontWeights.Normal;
             textBlock.Foreground = Brushes.Yellow;
 
