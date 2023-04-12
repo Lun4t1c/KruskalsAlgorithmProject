@@ -26,6 +26,10 @@
             <Button Click="GenerateDefaultGraphButton_Click"
                     Content="Generate graph"
                     Margin="5"/>
+            
+            <Button Click="GenerateDefaultDisjointGraphButton_Click"
+                    Content="Generate disjoint graph"
+                    Margin="5"/>
 
             <Button Click="PerformKruskalButton_Click"
                     Content="Perform Kruskal"

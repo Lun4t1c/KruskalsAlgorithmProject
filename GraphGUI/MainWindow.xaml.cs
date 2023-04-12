@@ -73,6 +73,12 @@ namespace GraphGUI
             GenerateGraph();
         }
 
+        private void GenerateDefaultDisjointGraph()
+        {
+            CurrentGraph = Graph.GenerateSampleGraphDisjoint();
+            GenerateGraph();
+        }
+
         private void GenerateVertices()
         {
             ClearCanvas();
@@ -247,6 +253,11 @@ namespace GraphGUI
         private void GenerateDefaultGraphButton_Click(object sender, RoutedEventArgs e)
         {
             GenerateDefaultGraph();
+        }
+
+        private void GenerateDefaultDisjointGraphButton_Click(object sender, RoutedEventArgs e)
+        {
+            GenerateDefaultDisjointGraph();
         }
 
         private void PerformKruskalButton_Click(object sender, RoutedEventArgs e)
