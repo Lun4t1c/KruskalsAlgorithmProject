@@ -109,25 +109,17 @@ namespace GraphGUI
             if (IsOverlayModeEnabled)
             {
                 foreach (Edge edge in CurrentGraph.Edges)
-                    DrawLineBetweenVertexUserControls(edge, Brushes.Gray);
+                    DrawLineBetweenVertexUserControls(edge, Brushes.Gray, 3);
 
                 if (OverlayGraph != null)
-                {
                     foreach (Edge edge in OverlayGraph.Edges)
-                    {
-                        DrawLineBetweenVertexUserControls(edge, Brushes.Green);
-                    }
-                }
+                        DrawLineBetweenVertexUserControls(edge, Brushes.Green, 4);
             }
             else
             {
                 if (OverlayGraph != null)
-                {
                     foreach (Edge edge in OverlayGraph.Edges)
-                    {
-                        DrawLineBetweenVertexUserControls(edge, Brushes.Gray);
-                    }
-                }
+                        DrawLineBetweenVertexUserControls(edge, Brushes.Gray, 3);
             }
         }
 
@@ -155,7 +147,7 @@ namespace GraphGUI
             return VertexUserControls.Find(vuc => vuc.Vertex.Label == label);
         }
 
-        private void DrawLineBetweenVertexUserControls(Edge edge, Brush brush)
+        private void DrawLineBetweenVertexUserControls(Edge edge, Brush brush, int thickness)
         {
             VertexUserControl vertexControl1 = FindVertexUserControlByLabel(edge.FromVertex.Label);
             VertexUserControl vertexControl2 = FindVertexUserControlByLabel(edge.ToVertex.Label);
@@ -172,7 +164,7 @@ namespace GraphGUI
 
             // Set the color and thickness of the line
             line.Stroke = brush;
-            line.StrokeThickness = 4;
+            line.StrokeThickness = thickness;
 
             Canvas.SetZIndex(line, -1);
 

@@ -48,15 +48,12 @@
 
         public void AddEdge(Edge edge)
         {
-            Vertex fromVertex = _findOrCreateVertex(edge.FromVertex.Label);
-            Vertex toVertex = _findOrCreateVertex(edge.ToVertex.Label);
-
-            Edges.Add(new Edge(
+            AddEdge(
                 edge.Label,
                 edge.Weight,
-                fromVertex,
-                toVertex
-            ));
+                edge.FromVertex.Label,
+                edge.ToVertex.Label
+            );
         }
 
         public Graph GetMSTKruskal()
@@ -66,17 +63,18 @@
 
             int[] parent = new int[Vertices.Count];
             for (int i = 0; i < Vertices.Count; i++)
-            {
                 parent[i] = i;
-            }
 
             List<Edge> minimumSpanningTree = new List<Edge>();
 
             foreach (Edge edge in edges)
             {
+                // Find absolute parents of both vertices
                 int root1 = FindRoot(edge.FromVertex.Id - 1, parent);
                 int root2 = FindRoot(edge.ToVertex.Id - 1, parent);
 
+                // If parents are different vertices then it's guaranteed
+                // that adding this edge will not form cycle in graph
                 if (root1 != root2)
                 {
                     minimumSpanningTree.Add(edge);
@@ -86,25 +84,9 @@
 
             Graph graph = new Graph();
             foreach (Edge edge in minimumSpanningTree)
-            {
                 graph.AddEdge(edge);
-            }
+
             return graph;
-        }
-
-        int FindRoot(int vertex, int[] parent)
-        {
-            while (parent[vertex] != vertex)
-            {
-                vertex = parent[vertex];
-            }
-            return vertex;
-        }
-
-        public void TransformIntoMSTKruskal()
-        {
-            Graph mst = this.GetMSTKruskal();
-            this.Edges = mst.Edges;
         }
 
         public List<Graph> GetMSTKruskalStepByStep()
@@ -119,17 +101,18 @@
 
             int[] parent = new int[Vertices.Count];
             for (int i = 0; i < Vertices.Count; i++)
-            {
                 parent[i] = i;
-            }
 
             List<Edge> minimumSpanningTreeEdges = new List<Edge>();
 
             foreach (Edge edge in edges)
             {
+                // Find absolute parents of both vertices
                 int root1 = FindRoot(edge.FromVertex.Id - 1, parent);
                 int root2 = FindRoot(edge.ToVertex.Id - 1, parent);
 
+                // If parents are different vertices then it's guaranteed
+                // that adding this edge will not form cycle in graph
                 if (root1 != root2)
                 {
                     minimumSpanningTreeEdges.Add(edge);
@@ -141,11 +124,23 @@
 
             Graph graph = new Graph();
             foreach (Edge edge in minimumSpanningTreeEdges)
-            {
                 graph.AddEdge(edge);
-            }
 
             return steps;
+        }
+
+        int FindRoot(int vertex, int[] parent)
+        {
+            while (parent[vertex] != vertex)
+                vertex = parent[vertex];
+
+            return vertex;
+        }
+
+        public void TransformIntoMSTKruskal()
+        {
+            Graph mst = this.GetMSTKruskal();
+            this.Edges = mst.Edges;
         }
 
         private Vertex _addVertex(string label)
@@ -153,11 +148,6 @@
             Vertex vertex = new Vertex(Vertices.Count + 1, label);
             Vertices.Add(vertex);
             return vertex;
-        }
-
-        private void _containsCycle()
-        {
-            throw new NotImplementedException();
         }
 
         private Vertex _findOrCreateVertex(string label)
