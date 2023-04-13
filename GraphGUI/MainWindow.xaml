@@ -24,11 +24,15 @@
                     Background="#06021a">
 
             <Button Click="GenerateDefaultGraphButton_Click"
-                    Content="Generate graph"
+                    Content="Generate default graph"
                     Margin="5"/>
             
             <Button Click="GenerateDefaultDisjointGraphButton_Click"
                     Content="Generate disjoint graph"
+                    Margin="5"/>
+
+            <Button Click="GenerateGraphFromFileButton_Click"
+                    Content="Generate from file"
                     Margin="5"/>
 
             <Button Click="PerformKruskalButton_Click"

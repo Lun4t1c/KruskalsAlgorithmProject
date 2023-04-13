@@ -70,6 +70,12 @@ namespace GraphGUI
             GenerateGraph();
         }
 
+        private void GenerateGraphFromFile()
+        {
+            CurrentGraph = Graph.LoadFromFile(@"D:\Programming\Programs\C#\KruskalsAlgorithm\GraphGUI\sampleGraph.txt");
+            GenerateGraph();
+        }
+
         private void GenerateVertices()
         {
             ClearCanvas();
@@ -249,6 +255,11 @@ namespace GraphGUI
         private void GenerateDefaultDisjointGraphButton_Click(object sender, RoutedEventArgs e)
         {
             GenerateDefaultDisjointGraph();
+        }
+
+        private void GenerateGraphFromFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            GenerateGraphFromFile();
         }
 
         private void PerformKruskalButton_Click(object sender, RoutedEventArgs e)

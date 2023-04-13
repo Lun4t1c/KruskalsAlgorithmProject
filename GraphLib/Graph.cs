@@ -166,6 +166,25 @@
 
 
         #region Static methods
+        public static Graph LoadFromFile(string path)
+        {
+            Graph graph = new Graph();
+
+            string[] lines = File.ReadAllLines(path);
+            foreach (string line in lines)
+            {
+                string[] values = line.Split(',');
+                graph.AddEdge(
+                    values[0],
+                    int.Parse(values[1]),
+                    values[2],
+                    values[3]
+                );
+            }
+
+            return graph;
+        }
+
         public static Graph GenerateSampleGraph()
         {
             Graph graph = new Graph();
