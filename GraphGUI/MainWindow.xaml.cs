@@ -72,8 +72,15 @@ namespace GraphGUI
 
         private void GenerateGraphFromFile()
         {
-            CurrentGraph = Graph.LoadFromFile(@"D:\Programming\Programs\C#\KruskalsAlgorithm\GraphGUI\sampleGraph.txt");
-            GenerateGraph();
+            try
+            {
+                CurrentGraph = Graph.LoadFromFile(@"D:\Programming\Programs\C#\KruskalsAlgorithm\GraphGUI\sampleGraph.txt");
+                GenerateGraph();
+            }
+            catch (Exception exc)
+            {
+                System.Windows.MessageBox.Show($"Could not graph from file: {exc.Message}", "Error");
+            }
         }
 
         private void GenerateVertices()
