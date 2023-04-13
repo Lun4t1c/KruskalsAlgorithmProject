@@ -35,17 +35,6 @@ namespace GraphGUI
         public List<TextBlock> WeightsTextBlocks { get; set; } = new List<TextBlock>();
         private bool IsOverlayModeEnabled { get; set; } = false;
         public ToolsEnum SelectedTool { get; set; } = ToolsEnum.None;
-
-        public Dictionary<string, Point> CustomVertexPoints { get; set; } = new Dictionary<string, Point>()
-        {
-            { "a", new Point() },
-            { "b", new Point() },
-            { "c", new Point() },
-            { "d", new Point() },
-            { "e", new Point() },
-            { "f", new Point() },
-            { "g", new Point() },
-        };
         #endregion
 
 
@@ -61,6 +50,8 @@ namespace GraphGUI
         #region Methods
         private void GenerateGraph()
         {
+            CurrentStepsIndex = 0;
+            OverlayGraph = null;
             ClearCanvas();
 
             GenerateVertices();
